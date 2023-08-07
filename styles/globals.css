@@ -1,0 +1,12 @@
+.ant-table-cell.ant-table-cell-fix-right.ant-table-cell-fix-right-first {
+  z-index: auto !important;
+}
+.ant-table-cell.ant-table-cell-fix-left.ant-table-cell-fix-left-last {
+  z-index: 1 !important;
+}
+.ant-layout-header.authHeader__HeaderStyled-sc-1mhl0ng-1.hdKgDU{
+  padding-inline:50px !important;
+}
+.ant-modal .ant-modal-content {
+ 
+  background-color:#FFF8DC !important;}

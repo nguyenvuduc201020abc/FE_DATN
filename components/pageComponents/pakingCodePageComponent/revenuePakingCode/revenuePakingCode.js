@@ -26,10 +26,15 @@ const RevenuePakingCode = () => {
   const [monthRevenue, setMonthRevenue] = useState()
   const [totalVehicleTrue, setTotalVehicleTrue] = useState()
   const [totalVehicleFalse, setTotalVehicleFalse] = useState()
-
+  const [vehicleInParking, setVehicleInParking] = useState()
+  const [vehicleSent, setVehicleSent] = useState()
+  useEffect(() => {
+    const monthNumber = parseInt(moment().format('M'))
+    setCurrentMonth(monthNumber)
+  }, [currentMonth])
   // useEffect(() => {
-  //   const initialValues = sessionStorage.getItem('parkingCode')
-  //   setParkingCode(initialValues)
+  //   const initialValues = sessionStorage.getItem('parking_name')
+  //   setParkingName(initialValues)
   // }, [])
   // useEffect(() => {
   //   const monthNumber = parseInt(moment().format('M'))
@@ -60,6 +65,21 @@ const RevenuePakingCode = () => {
   //     getData()
   //   }
   // }, [parkingCode, currentMonth])
+  useEffect(() => {
+    // Gọi API ở đây. Ví dụ:
+    axios.get(`${BASE_URL}/statisticDetailParking?month=${parseInt(moment().format('M'))}&parking_name=${sessionStorage.getItem('parking_name')}`)
+      .then(response => {
+        // Giả định API trả về số lượng bãi đỗ xe.
+        // Cập nhật giá trị cho totalItemPark
+        console.log(response.data);
+        setMonthRevenue(response.data.revenue);
+        setVehicleInParking(response.data.numberVehicleInParking);
+        setVehicleSent(response.data.numberVehicleSent);
+      })
+      .catch(error => {
+        console.error('Error fetching data from API:', error);
+      });
+  }, []);
   return (
     <>
       <Row justify="center">
@@ -70,7 +90,7 @@ const RevenuePakingCode = () => {
                 <Row gutter={[24, 16]}>
                   <Col xs={18}>
                     <H5Styled>Number vehicle in parking : </H5Styled>
-                    <SpanStyled>{totalVehicleFalse} vehicles</SpanStyled>
+                    <SpanStyled>{vehicleInParking} vehicles</SpanStyled>
                   </Col>
                   <Col xs={6}>
                     <StyledGrandchildrenDiv des="#f5365c" sou="#f56036">
@@ -87,7 +107,7 @@ const RevenuePakingCode = () => {
                 <Row gutter={[24, 16]}>
                   <Col xs={18}>
                     <H5Styled>Number of vehicle sent :</H5Styled>
-                    <SpanStyled>{totalVehicleTrue} vehicles</SpanStyled>
+                    <SpanStyled>{vehicleSent} vehicles</SpanStyled>
                   </Col>
                   <Col xs={6}>
                     <StyledGrandchildrenDiv des="#f5365c" sou="#f56036">
@@ -104,7 +124,7 @@ const RevenuePakingCode = () => {
                 <Row gutter={[24, 16]}>
                   <Col xs={18}>
                     <H5Styled>Revenue of month {currentMonth} :</H5Styled>
-                    <SpanStyled>{monthRevenue}VND</SpanStyled>
+                    <SpanStyled>{monthRevenue} VND</SpanStyled>
                   </Col>
                   <Col xs={6}>
                     <StyledGrandchildrenDiv des="#f5365c" sou="#f56036">

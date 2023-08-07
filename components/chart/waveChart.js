@@ -89,7 +89,7 @@ const [currentMonth, setCurrentMonth] = useState("");
       const revenueData = [];
       for (let i = 1; i <= 30; i++) {
       const response = await axios.get(
-        `${BASE_URL}/statistic_revenue_day_parking?day=${i}&month=${7}&parking_name=${sessionStorage.getItem('parking_name')}`
+        `${BASE_URL}/statistic_revenue_day_parking?day=${i}&month=${parseInt(moment().format("M"))}&parking_name=${sessionStorage.getItem('parking_name')}`
       )
       revenueData.push(response.data)
     }

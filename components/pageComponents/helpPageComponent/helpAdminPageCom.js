@@ -37,7 +37,7 @@ const HelpUserPageComponent = () => {
               <StyledH2Hepl>Announcement </StyledH2Hepl>
             )}
             {parseInt(Cookies.get('role')) === 1 && (
-              <StyledH2Hepl>Thông Báo đến User </StyledH2Hepl>
+              <StyledH2Hepl>Announcement to User </StyledH2Hepl>
             )}
             <Form
               labelAlign="thông báo"
@@ -89,7 +89,7 @@ const HelpUserPageComponent = () => {
 
               <Form.Item style={{ textAlign: 'center' }}>
                 <StyledButtonPressedEffect type="primary" htmlType="submit">
-                  Gửi
+                  Send
                 </StyledButtonPressedEffect>
               </Form.Item>
             </Form>

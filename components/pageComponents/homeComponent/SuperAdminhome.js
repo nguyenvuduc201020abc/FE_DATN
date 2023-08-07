@@ -23,7 +23,8 @@ const SuperAdminHome = () => {
   const [totalItemPark, setTotalItemPark] = useState()
   const [totalItemAcc, setTotalItemAcc] = useState()
   const [totalVehicleFalse, setTotalVehicleFalse] = useState()
-
+  const [totalParking, setTotalParking] = useState()
+  const [totalVehicle, setTotalVehicle] = useState()
   const [skip, setSkip] = useState(0)
   const [pageSize, setPageSize] = useState(10)
   const [currentMonth, setCurrentMonth] = useState('')
@@ -85,7 +86,20 @@ const SuperAdminHome = () => {
   //     getData()
   //   }
   // }, [currentMonth])
-
+  useEffect(() => {
+    // Gọi API ở đây. Ví dụ:
+    axios.get(`${BASE_URL}/statisticHomePage?month=${parseInt(moment().format('M'))}`)
+      .then(response => {
+        // Giả định API trả về số lượng bãi đỗ xe.
+        // Cập nhật giá trị cho totalItemPark
+        setMonthRevenue(response.data.revenue);
+        setTotalParking(response.data.numberParking);
+        setTotalVehicle(response.data.numberVehicleInParking);
+      })
+      .catch(error => {
+        console.error('Error fetching data from API:', error);
+      });
+  }, []);
   return (
     <>
       <Col span={23} style={{ marginLeft: '18px' }}>
@@ -93,9 +107,9 @@ const SuperAdminHome = () => {
           <Col xs={24} sm={12} lg={8} style={{ textAlign: 'center' }}>
             <StyledDiv>
               <Row gutter={[24, 16]}>
-                <Col xs={18}>
+                <Col xs={18}> 
                   <H5Styled>Number of parking : </H5Styled>
-                  <SpanStyled>{totalItemPark} 4 Parkings</SpanStyled>
+                  <SpanStyled>{totalParking} Parkings</SpanStyled>
                 </Col>
                 <Col xs={6}>
                   <StyledGrandchildrenDiv des="#f5365c" sou="#f56036">
@@ -112,7 +126,7 @@ const SuperAdminHome = () => {
               <Row gutter={[24, 16]}>
                 <Col xs={18}>
                   <H5Styled>Number vehicle in parking :</H5Styled>
-                  <SpanStyled>{totalVehicleFalse}5 vehicles</SpanStyled>
+                  <SpanStyled>{totalVehicle} Vehicles</SpanStyled>
                 </Col>
                 <Col xs={6}>
                   <StyledGrandchildrenDiv des="#f5365c" sou="#f56036">
@@ -146,7 +160,7 @@ const SuperAdminHome = () => {
               <Row gutter={[24, 16]}>
                 <Col xs={18}>
                   <H5Styled>Revenue of month {currentMonth} :</H5Styled>
-                  <SpanStyled>{monthRevenue}1665000 VND</SpanStyled>
+                  <SpanStyled>{monthRevenue} VND</SpanStyled>
                 </Col>
                 <Col xs={6}>
                   <StyledGrandchildrenDiv des="#f5365c" sou="#f56036">

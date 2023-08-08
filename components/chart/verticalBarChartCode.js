@@ -25,7 +25,7 @@ export const options = {
       },
       title: {
         display: true,
-        text: 'Statiscal chart of parking by month'
+        text: 'Statistical chart of parking by month'
       },
       tooltip: {
         mode: 'index',
@@ -81,7 +81,6 @@ export function VerticalBarChartCode() {
       const response = await axios.get(
         `${BASE_URL}/statistic_revenue_month_parking1?parking_name=${sessionStorage.getItem('parking_name')}`
       )
-      console.log(response);
       const revenueData = response.data;
       // const revenueData = [];
       //   for (let i = 1; i <= 12; i++) {

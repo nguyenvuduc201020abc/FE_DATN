@@ -24,7 +24,7 @@ export const options = {
       },
       title: {
         display: true,
-        text: 'Statistical chart by month '
+        text: 'Statistical chart by month'
       },
       tooltip: {
         mode: 'index',
@@ -72,14 +72,17 @@ export function VerticalBarChart() {
   useEffect(() => {
     
     const getData = async () => {
-      const revenueData = [];
-      // if(parseInt(Cookies.get('role')) === 0){
-      for (let i = 1; i <= 12; i++) {
-      const response = await axios.get(
-        `${BASE_URL}/statistic_revenue_month?month=${i}`
+    const response = await axios.get(
+        `${BASE_URL}/statistic_revenue_month1`
       )
-      revenueData.push(response.data)
-    }
+    const revenueData = response.data;
+      // if(parseInt(Cookies.get('role')) === 0){
+    //   for (let i = 1; i <= 12; i++) {
+    //   const response = await axios.get(
+    //     `${BASE_URL}/statistic_revenue_month?month=${i}`
+    //   )
+    //   revenueData.push(response.data)
+    // }
     setRevenue(revenueData);
   // }
 //   else{

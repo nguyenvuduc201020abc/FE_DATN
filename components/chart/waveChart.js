@@ -86,13 +86,16 @@ const [currentMonth, setCurrentMonth] = useState("");
   useEffect(() => {
     if (currentMonth !== "") {
     const getData = async () => {
-      const revenueData = [];
-      for (let i = 1; i <= 30; i++) {
-      const response = await axios.get(
-        `${BASE_URL}/statistic_revenue_day_parking?day=${i}&month=${parseInt(moment().format("M"))}&parking_name=${sessionStorage.getItem('parking_name')}`
+            const response = await axios.get(
+        `${BASE_URL}/statistic_revenue_day_parking1?month=${parseInt(moment().format("M"))}&parking_name=${sessionStorage.getItem('parking_name')}`
       )
-      revenueData.push(response.data)
-    }
+      const revenueData = response.data;
+    //   for (let i = 1; i <= 30; i++) {
+    //   const response = await axios.get(
+    //     `${BASE_URL}/statistic_revenue_day_parking?day=${i}&month=${parseInt(moment().format("M"))}&parking_name=${sessionStorage.getItem('parking_name')}`
+    //   )
+    //   revenueData.push(response.data)
+    // }
     setRevenue(revenueData);
   }
   getData()

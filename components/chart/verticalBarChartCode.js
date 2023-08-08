@@ -77,15 +77,22 @@ export function VerticalBarChartCode() {
   useEffect(() => {
     
     const getData =async () => {
-      const revenueData = [];
-      for (let i = 1; i <= 12; i++) {
-        console.log(`${BASE_URL}/statistic_revenue_month_parking?month=${i}&parking_name=${sessionStorage.getItem('parking_name')}`);
+
       const response = await axios.get(
-        `${BASE_URL}/statistic_revenue_month_parking?month=${i}&parking_name=${sessionStorage.getItem('parking_name')}`
+        `${BASE_URL}/statistic_revenue_month_parking1?parking_name=${sessionStorage.getItem('parking_name')}`
       )
-      console.log("RES",response);
-      revenueData.push(response.data) 
-    }
+      console.log(response);
+      const revenueData = response.data;
+      // const revenueData = [];
+      //   for (let i = 1; i <= 12; i++) {
+      //     console.log(`${BASE_URL}/statistic_revenue_month_parking?month=${i}&parking_name=${sessionStorage.getItem('parking_name')}`);
+      //   const response = await axios.get(
+      //     `${BASE_URL}/statistic_revenue_month_parking?month=${i}&parking_name=${sessionStorage.getItem('parking_name')}`
+      //   )
+      //   console.log("RES",response);
+      //   revenueData.push(response.data) 
+      //   console.log(revenueData)
+      // }
     setRevenue(revenueData);
   }
 

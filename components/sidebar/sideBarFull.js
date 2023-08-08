@@ -97,22 +97,22 @@ function SideBarFull({ onClick }) {
           >
             {UrlPath.home.title}
           </MenuButtonSideBarFull>
-
-          {isRoleVip && (
-            <MenuButtonTemp
-              marginLeft={'10px'}
-              onClickMenuButtonTemp={handleClickMenuButton}
-              icon={<DeviceIcon />}
-            >
-              Manage Parking
-              {toggleCaret ? (
-                <CaretUpOutlined style={{ marginLeft: '4px' }} />
-              ) : (
-                <CaretDownOutlined style={{ marginLeft: '4px' }} />
-              )}
-            </MenuButtonTemp>
+          {isRoleVip && ( <MenuButtonSideBarFull
+            active={router.pathname === UrlPath.device.url }
+            href={UrlPath.device.url}
+            icon={
+              <DeviceIcon
+                light={router.pathname ===
+                  UrlPath.device.url
+                    ? 1
+                    : 0}
+                color={COLOR.PRIMARY.BLACK}
+              />
+            }
+          >
+             Manage Parking
+          </MenuButtonSideBarFull>
           )}
-
           {isRoleAdmin && (
             <MenuButtonTemp
               marginLeft={'10px'}
@@ -127,7 +127,7 @@ function SideBarFull({ onClick }) {
               )}
             </MenuButtonTemp>
           )}
-            {isActive && (
+            {/* {isActive && (
             <div>
               <MenuChildrenButton
                 active={
@@ -150,7 +150,7 @@ function SideBarFull({ onClick }) {
                 List Parking
               </MenuChildrenButton>
               </div>
-              )}
+              )} */}
           {isActiveDeivce && (
             <div>
                  <MenuChildrenButton

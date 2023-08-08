@@ -3,8 +3,8 @@ const AdminAuthUrl = {
   base: '/login'
 }
 
-export const apiLogin = (data) => {
-  return request({
+export const apiLogin =  async (data) => {
+  return  await  request({
     url: AdminAuthUrl.base,
     method: 'post',
     data

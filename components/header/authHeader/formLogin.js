@@ -22,15 +22,15 @@ const FormLogin = () => {
   const router = useRouter()
   const [isLoading, setIsLoading] = useAtom(loadingAtom)
   const [, setAccount] = useAtom(updateAccountAtom)
-  const handleSubmitLogin = () => {
+  const handleSubmitLogin = async () => {
     setIsLoading(true)
     const dataReq = {
       username: userNameTemp,
       password: passwordTemp
     }
-    apiLogin(dataReq)
-      .then((res) => {
-        Cookies.set('jwt_token', res.data.accessToken, { expires: 7 })
+    try {
+      const data = await axios.post(`${BASE_URL}/login`, dataReq)
+              Cookies.set('jwt_token', data.data.accessToken, { expires: 7 })
         router.push(UrlPath.home.url)
         
         setUser({
@@ -38,25 +38,56 @@ const FormLogin = () => {
           password: passwordTemp
         })
         setAccount({
-          role: res.data.role
+          role: data.data.role
         })
 
         //luu gia tri id ng dung len cookie
 
         Cookies.set('username', userNameTemp, { expires: 7 })
-        Cookies.set('role', res.data.role, { expires: 7 })
-        Cookies.set('parkingName', res.data.parkingName, { expires: 7 })
+        Cookies.set('role', data.data.role, { expires: 7 })
+        Cookies.set('parkingName', data.data.parkingName, { expires: 7 })
 
         const metaViewport = document.querySelector('meta[name="viewport"]')
         metaViewport.setAttribute(
           'content',
           'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
         )
-      })
-      .catch(() => {
-        setIsLoading(false)
+    } catch (error) {
         message.error('Login failed')
-      })
+    }finally{
+      setIsLoading(false)
+
+    }
+    // console.log(data)
+    // apiLogin(dataReq)
+  //  apiLogin(dataReq).then((res) => {
+  //       Cookies.set('jwt_token', res.data.accessToken, { expires: 7 })
+  //       router.push(UrlPath.home.url)
+        
+  //       setUser({
+  //         username: userNameTemp,
+  //         password: passwordTemp
+  //       })
+  //       setAccount({
+  //         role: res.data.role
+  //       })
+
+  //       //luu gia tri id ng dung len cookie
+
+  //       Cookies.set('username', userNameTemp, { expires: 7 })
+  //       Cookies.set('role', res.data.role, { expires: 7 })
+  //       Cookies.set('parkingName', res.data.parkingName, { expires: 7 })
+
+  //       const metaViewport = document.querySelector('meta[name="viewport"]')
+  //       metaViewport.setAttribute(
+  //         'content',
+  //         'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
+  //       )
+  //     })
+  //     .catch(() => {
+  //       setIsLoading(false)
+  //       message.error('Login failed')
+  //     })
   }
   const onFinish = (values) => {
     console.log('Success:', values)

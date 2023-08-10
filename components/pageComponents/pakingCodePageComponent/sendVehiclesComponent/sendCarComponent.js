@@ -103,7 +103,7 @@ const SendMotoComponent = () => {
       console.log((response.data.secure_url));
       // setUrlImage(response.data.secure_url);
       console.log('Image uploaded successfully:', response.data.secure_url);
-      const recognitionUrl = 'http://localhost:80/api/recognition';
+      const recognitionUrl = 'https://smartparking.website/xla/api/recognition';
       // const requestBody = 'https://res.cloudinary.com/deae9vxvg/image/upload/v1688226172/kow7pug8o1s7dz8dxn6t.jpg'; // Adjust the data value as required
       const requestBody = response.data.secure_url;
       const recognitionResponse = await axios.post(recognitionUrl, requestBody);

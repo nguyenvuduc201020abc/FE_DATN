@@ -20,16 +20,16 @@ const SearchParking = () =>{
     const GetParking = async () => {
       await axios
       .get(
-        `${BASE_URL}parking/search?Skip=${skip}&PageSize=${pageSize}&Search=${value}`
+        `${BASE_URL}/get_info_parking_search?search=${value}`
       )
       .then((response)=>{
-        if (response.data.result.items.length === 0) {
-          message.error('Không tìm thấy kết quả nào')
+        if (response.size === 0) {
+          message.error('No result is found!')
         } else {
-          message.info('Lấy dữ liệu thành công')
+          message.info('Get result successfully!')
           setValueParkSearch(value)
-          setDataParkSearch(response.data.result.items)
-          setTotalParkSearch(response.data.result.totalItems)
+          setDataParkSearch(response.data)
+          setTotalParkSearch(response.data.length)
         }
       })
 

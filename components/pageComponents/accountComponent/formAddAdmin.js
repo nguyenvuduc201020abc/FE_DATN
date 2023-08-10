@@ -98,6 +98,10 @@ const FormAddAccount = () => {
                   message: 'Xin Hãy chọn Quyền!'
                 }
               ]}
+
+
+
+              
             >
               <Select
                 // defaultValue={2}
@@ -108,7 +112,7 @@ const FormAddAccount = () => {
                 options={[
                   {
                     value: 1,
-                    label: 'Manager'
+                    label: 'Employee'
                   },
                 ]}
               />
@@ -164,7 +168,7 @@ const FormAddAccount = () => {
               rules={[
                 {
                   required: true,
-                  message: 'Xin Hãy chọn Quyền!'
+                  message: 'Please choose role!'
                 }
               ]}
             >
@@ -187,11 +191,11 @@ const FormAddAccount = () => {
             rules={[
               {
                 required: true,
-                message: 'Hãy Nhâp Tài Khoản!'
+                message: 'Please enter username!'
               },
               {
                 pattern: /^.{4,}$/,
-                message: 'Tài khoản quá ngắn! '
+                message: 'Username so short! '
               }
             ]}
           >
@@ -207,7 +211,7 @@ const FormAddAccount = () => {
             rules={[
               {
                 required: true,
-                message: 'Hãy Nhâp Mật Khẩu !'
+                message: 'Please enter password!'
               },
               {
                 pattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\d\s]).{8,}$/,
@@ -264,7 +268,7 @@ const FormAddAccount = () => {
 
           <Form.Item style={{ textAlign: 'center' }}>
             <StyledButtonPressedEffect type="primary" htmlType="submit">
-              Add admin
+              Add employee
             </StyledButtonPressedEffect>
           </Form.Item>
         </Form>

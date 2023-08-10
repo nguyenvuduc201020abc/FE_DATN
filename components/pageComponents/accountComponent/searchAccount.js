@@ -26,21 +26,23 @@ const SearchAccount = () => {
     const getUsername = async () => {
       await axios
         .get(
-          `${BASE_URL}account/search?Skip=${skip}&PageSize=${pageSize}&Search=${value}`
+          `${BASE_URL}/get_employee_info_search?search=${value}`
         )
         .then((response) => {
-          if (response.data.result.items.length === 0) {
-            message.error('Không tìm thấy kết quả nào')
+          if (response.data.length === 0) {
+            message.error('No result is found!')
           } else {
-            message.info('Lấy dữ liệu thành công')
+            message.info('Get result successfully!')
             //setValueAccSearch(value)
-            setDataAccSearch(response.data.result.items)
+            console.log(response.data)
+            setDataAccSearch(response.data)
             console.log()
             // setTotalAccSearch(response.data.result.totalItems)
           }
         })
         .catch((error) => {
-          message.error('Không tồn tại')
+          console.log(error)
+          message.error('Error!')
           // setData(newDataConfigFailure)
         })
       setIsLoading(false)

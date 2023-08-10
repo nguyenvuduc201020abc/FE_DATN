@@ -100,7 +100,7 @@ const AccComoponent = () => {
         permission: 'Employee',
         // phoneNumber: item[1].phoneNumber,
         // email: item[1].email,
-        parkingName: item[1].parking_name
+        parking_name: item[1].parking_name
       })
     })
     setDataOri(originData)
@@ -235,12 +235,12 @@ const AccComoponent = () => {
           <Row justify="center" gutter={[8, 4]}>
             <Col>
               <Typography.Link onClick={() => save(record.key)}>
-                <Button>Lưu</Button>
+                <Button>Save</Button>
               </Typography.Link>
             </Col>
             <Col>
-              <Popconfirm title="chắc chắn để hủy?" onConfirm={cancel}>
-                <Button>Hủy</Button>
+              <Popconfirm title="Are you sure cancel?" onConfirm={cancel}>
+                <Button>Cancel</Button>
               </Popconfirm>
             </Col>
           </Row>
@@ -298,19 +298,19 @@ const AccComoponent = () => {
       width: '100px',
       editable: true,
       render: (text) => {
-        if (text === 1) {
-          return 'Admin';
-        }
-        if (text === 2) {
-          return 'User';
-        }
+        // if (text === 1) {
+        //   return 'Admin';
+        // }
+        // if (text === 2) {
+        //   return 'User';
+        // }
 
-        return text;
+        return 'Employee';
       },
     },
           {
             title: 'Parking name',
-            dataIndex: 'parkingName',
+            dataIndex: 'parking_name',
             width: '130px',
             editable: true,
           },
@@ -377,14 +377,10 @@ const AccComoponent = () => {
               }
               columns={mergedColumns}
               rowClassName="editable-row"
-              pagination={false}
+              pagination={true}
             />
           </Form>
-          <Pagination
-            total={dataSearch.length === 0 ? totalItem : totalSearch}
-            // onChange={handlePaging}
-            style={{ float: 'right', margin: '10px' }}
-          />
+          
         </Container>
       </Spin>
     </>

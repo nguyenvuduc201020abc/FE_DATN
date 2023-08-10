@@ -179,6 +179,9 @@ const OutMotoComponent = () => {
         setlisenseVehicle(response.data.license_vehicle)
         setEntryTime(entry_time2)
         setCost(response.data.cost)
+        console.log(`${BASE_URL}/export-bill?id_card=${IDCard}`,{headers});
+        console.log(response.data);
+        setCost(response.data.cost)
       } catch (error) {
         // Xử lý lỗi khi gọi API
         console.error(error)

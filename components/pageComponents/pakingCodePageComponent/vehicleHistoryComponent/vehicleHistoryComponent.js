@@ -194,7 +194,7 @@ const AccComoponent = () => {
       <Row justify="end" style={{ marginTop: '20px' }} className="pay-button-row">
         <Button type="primary" onClick={handlePayment}>Complete payment</Button>
       </Row>
-    </>
+    </> 
       </Row>
       </Col>
       {/* <Button type="primary" >

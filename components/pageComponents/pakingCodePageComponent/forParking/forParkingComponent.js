@@ -47,7 +47,7 @@ const ForParkingComponent = (prop) => {
   const [dataSearch, setDataAccSearch] = useAtom(dataAccSearchAtom)
   const [totalSearch, setTotalAccSearch] = useAtom(totalAccSearchAtom)
   const [valueSearch, setValueAccSearch] = useAtom(valueAccSearchAtom)
-  const [parrkingCode, setParkingCode] = useState()
+  const [parrkingName, setParkingName] = useState()
   const [cost, setCost] = useAtom(modalCostVehicle)
 
   const [code, setCode] = useState()
@@ -73,17 +73,17 @@ const ForParkingComponent = (prop) => {
     setVisible(false)
   }
   useEffect(() => {
-    const initialValues = parseInt(Cookies.get('parkingCode'))
-    setParkingCode(initialValues)
+    const initialValues = Cookies.get('parkingName')
+    setParkingName(initialValues)
   }, [])
-  console.log('pa', parrkingCode)
+  // console.log('pa', parrkingCode)
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}entryVehicles?Skip=${skip}&PageSize=${pageSize}`
+          `${BASE_URL}/get_vehicle_in_parking?parking_name=${Cookies.get('parkingName')}`
         )
-        setVehicles(response.data.result.items)
+        setVehicles(response.data)
       } catch (error) {
         // Xử lý lỗi khi gọi API
         console.error(error)
@@ -128,6 +128,8 @@ const ForParkingComponent = (prop) => {
   //           message.error('Không tồn tại')
   //           // setData(newDataConfigFailure)
   //         })
+
+
   //     }
   //     if (dataSearch.length === 0) {
   //     } else {
@@ -136,19 +138,19 @@ const ForParkingComponent = (prop) => {
   //   }
 
   const originData = []
+  const moment = require('moment');
   useEffect(() => {
     const filteredData = Object.entries(
       parseInt(Cookies.get('role')) === 0 ? vehicles : vehicles
     )
-      .filter((item) => item[1].parkingCode == parrkingCode)
       .map((item, index) => ({
         key: index,
-        entryTime: item[1].entryTime,
-        parkingCode: item[1].parkingCode,
-        username: item[1].username,
-        vehicleyType: item[1].vehicleyType,
+        entryTime: moment(item[1].entry_time).format("YYYY-MM-DD HH:mm:ss"),
+        parkingname: item[1].parking_name,
+        username: item[1].id_card,
+        vehicleyType: item[1].type,
         image: item[1].image,
-        lisenseVehicle: item[1].lisenseVehicle
+        lisenseVehicle: item[1].license_vehicle
       }))
     setDataOri(filteredData)
   }, [vehicles])
@@ -160,12 +162,12 @@ const ForParkingComponent = (prop) => {
   const columns = [
     {
       title: 'Parking name',
-      dataIndex: 'parkingCode',
+      dataIndex: 'parkingname',
       width: '10%',
       editable: true
     },
     {
-      title: 'Username',
+      title: 'Id card',
       dataIndex: 'username',
       width: '13%',
       editable: true
@@ -212,7 +214,7 @@ const ForParkingComponent = (prop) => {
         }
       },
       render: () => (
-        <Tooltip title="Cho xe ra" mouseEnterDelay={0.5}>
+        <Tooltip title="Out parking" mouseEnterDelay={0.5}>
           <div>
             <ExitParking width={'30px'} height={'30px'} color={'red'} />
           </div>

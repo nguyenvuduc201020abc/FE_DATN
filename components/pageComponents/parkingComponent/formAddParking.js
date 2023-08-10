@@ -87,7 +87,7 @@ const FormAddParking = ( ) => {
             name="parking_name"
             style={{ paddingBottom: '1px' }}
 
-            rules={[{required: true, message: 'Hãy nhập tên bãi đỗ!',},]}
+            rules={[{required: true, message: 'Enter parking name!',},]}
 
             >
                 <Input
@@ -102,7 +102,7 @@ const FormAddParking = ( ) => {
             name="parking_address"
             style={{ paddingBottom: '1px' }}
 
-            rules={[{required: true, message: 'Hãy nhập địa chỉ!',},]}
+            rules={[{required: true, message: 'Enter address!',},]}
 
             >
                 <Input

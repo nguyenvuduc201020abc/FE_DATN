@@ -15,23 +15,23 @@ const AddVehicleModal = () => {
       setOpen(false)
     }, 3000)
   }
-  const handleCancel = () => {
-    setOpen(false)
-  }
-  return (
-    <>
-      <Button onClick={showModal}>Add vehicle to parking </Button>
-      <Modal
-        open={open}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        footer={[]}
-        width={'350px'}
-      >
-        <FormAddVehicle />
-      </Modal>
-    </>
-  )
+  // const handleCancel = () => {
+  //   setOpen(false)
+  // }
+  // return (
+  //   <>
+  //     <Button onClick={showModal}>Add vehicle to parking </Button>
+  //     <Modal
+  //       open={open}
+  //       onOk={handleOk}
+  //       onCancel={handleCancel}
+  //       footer={[]}
+  //       width={'350px'}
+  //     >
+  //       <FormAddVehicle />
+  //     </Modal>
+  //   </>
+  // )
 }
 
 export default memo(AddVehicleModal)

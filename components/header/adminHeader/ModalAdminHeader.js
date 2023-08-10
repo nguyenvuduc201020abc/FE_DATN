@@ -28,7 +28,7 @@ const ModalAdminHeader = () => {
       </StyledButtonAntd>
       <Modal
         open={open}
-        title=" --Nhập Thông Tin Đổi Mật Khẩu-- "
+        title=" ---Enter old and new password---"
         onOk={handleOk}
         onCancel={handleCancel}
         footer={[]}

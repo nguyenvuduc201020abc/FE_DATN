@@ -31,6 +31,7 @@ const FormBillVehilce = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [billmodalData, setBillModalData] = useAtom(vehicleBillModalData)
   const [parkingCode, setParkingCode] = useState()
+  
   const [lisenseVehicle, setLisenseVehicle] = useState()
   const [username, setUserName] = useState()
   const [entryTime, setEntryTime] = useState()
@@ -50,11 +51,12 @@ const FormBillVehilce = () => {
       setModalVisible(false)
     }, 15000)
   }
+  console.log(modalVisible,"dddddd")
   useEffect(() => {
     setImageIn(billmodalData.imageIn)
     setEntryTime(billmodalData.entryTime)
     // setEntryTime(billmodalData.entryTime)
-    setUserName(billmodalData.username)
+    setUserName(billmodalData.id_card)
     setLisenseVehicle(billmodalData.lisenseVehicle)
     setVehicleyType(billmodalData.vehicleyType)
     setCost(billmodalData.cost)
@@ -76,7 +78,7 @@ const FormBillVehilce = () => {
         vehicleyType,
         parkingAddress,
         cost,
-        username,
+        id_card,
         lisenseVehicle,
         imageIn,
         entryTime,

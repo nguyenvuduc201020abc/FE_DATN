@@ -90,6 +90,7 @@ const [currentMonth, setCurrentMonth] = useState("");
         `${BASE_URL}/statistic_revenue_day_parking1?month=${parseInt(moment().format("M"))}&parking_name=${sessionStorage.getItem('parking_name')}`
       )
       const revenueData = response.data;
+    // const revenueData = [];
     //   for (let i = 1; i <= 30; i++) {
     //   const response = await axios.get(
     //     `${BASE_URL}/statistic_revenue_day_parking?day=${i}&month=${parseInt(moment().format("M"))}&parking_name=${sessionStorage.getItem('parking_name')}`

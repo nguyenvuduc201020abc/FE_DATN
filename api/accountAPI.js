@@ -1,6 +1,6 @@
 import { request } from './requet'
 const ChangePassUrl = {
-  base: 'account/changepass'
+  base: '/change_password'
 }
 const GetAllAccount = {
   base: 'account?Skip=0&PageSize=1000000000'

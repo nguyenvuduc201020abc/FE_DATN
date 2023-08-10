@@ -172,7 +172,7 @@ function SideBarFull({ onClick }) {
                   />
                 }
               >
-                Motorbike Parking 
+                Motorbike In 
               </MenuChildrenButton>
               <MenuChildrenButton
                 active={
@@ -193,7 +193,7 @@ function SideBarFull({ onClick }) {
                   />
                 }
               >
-                Car Parking
+                Car In
               </MenuChildrenButton>
               
            
@@ -216,7 +216,7 @@ function SideBarFull({ onClick }) {
                   />
                 }
               >
-                Vehicle exit
+                Vehicle out
               </MenuChildrenButton>
       
               <MenuChildrenButton

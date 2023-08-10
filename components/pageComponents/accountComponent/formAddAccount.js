@@ -163,7 +163,7 @@ const FormAddAccount = () => {
             rules={[
               {
                 required: true,
-                message: 'Hãy Nhâp Tài Khoản!'
+                message: 'Please enter username!'
               },
               {
                 pattern: /^.{4,}$/,

@@ -135,7 +135,7 @@ const FormLogin = () => {
             rules={[
               {
                 required: true,
-                message: ' Nhâp Tài Khoản'
+                message: ' Please enter username!'
               }
             ]}
           >
@@ -153,7 +153,7 @@ const FormLogin = () => {
             rules={[
               {
                 required: true,
-                message: ' Nhâp Mật Khẩu !'
+                message: ' Please enter password!'
               }
             ]}
           >

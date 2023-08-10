@@ -30,7 +30,7 @@ const FormOutVehilce = () => {
     moment().format('HH:mm:ss  YYYY-MM-DD ')
   )
   const [modalData, setModalData] = useAtom(vehicleModalData)
-  const [parkingCode, setParkingCode] = useState()
+  const [parkingName, setParkingName] = useState()
   const [lisenseVehicle, setLisenseVehicle] = useState()
   const [username, setUserName] = useState()
   const [entryTime, setEntryTime] = useState()
@@ -49,58 +49,79 @@ const FormOutVehilce = () => {
     setUserName(modalData.username)
     setLisenseVehicle(modalData.lisenseVehicle)
     setVehicleyType(modalData.vehicleyType)
-    setParkingCode(parseInt(Cookies.get('parkingCode')))
+    setParkingName(Cookies.get('parkingName'))
+    setCost(35000);
   })
-  const onFinish = async (values) => {
-    console.log('values', values)
-    console.log('image', imageOut)
-    console.log('valiues', values.username)
-    setIsLoading(true)
-    setTimeout(() => {
-      setModalVisible(false)
-    }, 3500)
-    axios
-      .delete(
-        `${BASE_URL}entryVehicles/lisenseVehicle?LisenseVehicle=${lisenseVehicle}&VehileyType=${vehicleyType}&ParkingCode=${parkingCode}`
+  const onFinish = async () => {
+    console.log(`${BASE_URL}/save-bill?id_card=${modalData.username}`)
+    const headers = {
+      Authorization:'Bearer '+Cookies.get('jwt_token'),
+    };
+    
+    await axios
+      .post(
+        `${BASE_URL}/save-bill?id_card=${modalData.username}`,{headers}
       )
       .then((response) => {
-        const deletedCost = response.data.cost
-        setCost(deletedCost)
-        // Gán giá trị cost vào values trước khi gọi API post
-        values.cost = deletedCost
-        axios
-          .post(`${BASE_URL}bill`, values)
-
-          .then(() => {
-            setIsLoading(false)
-            message.info('Cho xe ra thành công')
-          })
-          .catch((error) => {
-            setIsLoading(false)
-            message.error(error.response.data.message)
-          })
+        console.log(headers)
+        message.info('Successfully');
+        console.log("aaaabbbb");
       })
       .catch((error) => {
-        setIsLoading(false)
-        // message.error(error.response.data.message);
-      })
+        console.log(headers)
+        console.error(error);
+        message.info('Failed');
+        // Xử lý lỗi ở đây
+      });
+    // console.log('values', values)
+    // console.log('image', imageOut)
+    // console.log('valiues', values.username)
+    // setIsLoading(true)
+    // setTimeout(() => {
+    //   setModalVisible(false)
+    // }, 3500)
+    // axios
+    //   .delete(
+    //     `${BASE_URL}entryVehicles/lisenseVehicle?LisenseVehicle=${lisenseVehicle}&VehileyType=${vehicleyType}&ParkingCode=${parkingCode}`
+    //   )
+    //   .then((response) => {
+    //     const deletedCost = response.data.cost
+    //     // setCost(deletedCost)
+    //     // Gán giá trị cost vào values trước khi gọi API post
+    //     values.cost = deletedCost
+    //     axios
+    //       .post(`${BASE_URL}bill`, values)
+
+    //       .then(() => {
+    //         setIsLoading(false)
+    //         message.info('Out parking successfully!')
+    //       })
+    //       .catch((error) => {
+    //         setIsLoading(false)
+    //         message.error(error.response.data.message)
+    //       })
+    //   })
+    //   .catch((error) => {
+    //     setIsLoading(false)
+    //     // message.error(error.response.data.message);
+    //   })
   }
 
   const onFinishFailed = () => {}
-  useEffect(() => {
-    if (parkingCode && lisenseVehicle) {
-      form.setFieldsValue({
-        parkingCode,
-        imageOut,
-        lisenseVehicle,
-        username,
-        vehicleyType,
-        entryTime,
-        imageIn,
-        outTime
-      })
-    }
-  }, [parkingCode, lisenseVehicle])
+  // useEffect(() => {
+  //   if (parkingCode && lisenseVehicle) {
+  //     form.setFieldsValue({
+  //       parkingCode,
+  //       imageOut,
+  //       lisenseVehicle,
+  //       username,
+  //       vehicleyType,
+  //       entryTime,
+  //       imageIn,
+  //       outTime
+  //     })
+  //   }
+  // }, [parkingCode, lisenseVehicle])
   return (
     <Spin size="large" spinning={isLoading}>
       <Form
@@ -114,15 +135,15 @@ const FormOutVehilce = () => {
         onFinishFailed={onFinishFailed}
         validateMessages={validateMessages}
       >
-        <h2 style={{ fontSize: '20px', textAlign: 'center' }}>Cho xe ra</h2>
+        <h2 style={{ fontSize: '20px', textAlign: 'center' }}>Out parking</h2>
 
         <Row gutter={[16, 16]}>
           <Col xs={24} sm={12} lg={12}>
             <Form.Item
-              name="parkingCode"
+              name="parkingName"
               style={{ paddingTop: '20px', marginBottom: '7px' }}
             >
-              <p>ParkingCode: {parkingCode} </p>
+              <p>Parking name: {parkingName} </p>
             </Form.Item>
           </Col>
           <Col xs={24} sm={12} lg={12}>
@@ -130,31 +151,31 @@ const FormOutVehilce = () => {
               name="username"
               style={{ paddingTop: '20px', marginBottom: '7px' }}
             >
-              <p>Tài khoản gửi: {username}</p>
+              <p>Id card: {username}</p>
             </Form.Item>
           </Col>
         </Row>
         <Row gutter={[16, 16]}>
           <Col xs={24} sm={12} lg={12}>
             <Form.Item name="vehicleyType" style={{ marginBottom: '7px' }}>
-              <p>Loại xe: {vehicleyType}</p>
+              <p>Type: {vehicleyType}</p>
             </Form.Item>
           </Col>
           <Col xs={24} sm={12} lg={12}>
             <Form.Item name="entryTime" style={{ marginBottom: '7px' }}>
-              <p>Thời gian vào: {entryTime}</p>
+              <p>Entry time: {entryTime}</p>
             </Form.Item>
           </Col>
         </Row>
         <Row gutter={[16, 16]}>
           <Col xs={24} sm={12} lg={12}>
             <Form.Item name="lisenseVehicle" style={{ marginBottom: '7px' }}>
-              <p>Biển số xe: {lisenseVehicle}</p>
+              <p>License vehicle: {lisenseVehicle}</p>
             </Form.Item>
           </Col>
           <Col xs={24} sm={12} lg={12}>
             <Form.Item name="outTime" style={{ marginBottom: '7px' }}>
-              <p> Thời gian ra: {outTime}</p>
+              <p> Out time: {outTime}</p>
             </Form.Item>
           </Col>
         </Row>
@@ -173,11 +194,11 @@ const FormOutVehilce = () => {
             />
        </Form.Item> */}
         <Form.Item name="cost" style={{ margin: ' 15px 5px' }}>
-          <h2>Thành tiền : {cost}VND</h2>
+          <h2>Cost : {cost} VND</h2>
         </Form.Item>
         <Form.Item style={{ textAlign: 'center' }}>
           <StyledButtonPressedEffect type="primary" htmlType="submit">
-            Cho xe ra
+            Out parking
           </StyledButtonPressedEffect>
         </Form.Item>
       </Form>

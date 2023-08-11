@@ -24,6 +24,10 @@ import MenuButtonSideBarFull from './menuButtonSideBarFull'
 import MenuButtonTemp from './menuButtonTemp'
 import MenuChildrenButton from './menuChildrenButton'
 import COLOR from '../../utils/color'
+import Motoricon from '../icons/Motoricon'
+import Caricon from '../icons/Caricon'
+import ExitSideIcon from '../icons/ExitSideIcon'
+import MonthTicket from '../icons/MonthTicket'
 
 function SideBarFull({ onClick }) {
   const logo = '/images/logoauth.png'
@@ -47,7 +51,7 @@ function SideBarFull({ onClick }) {
         router.pathname === `${UrlPath.parkingCode.url}/sendMoto` ||
         router.pathname === `${UrlPath.parkingCode.url}/sendCar` ||
         router.pathname === `${UrlPath.parkingCode.url}[parking]/revenue` ||
-        router.pathname === `${UrlPath.parkingCode.url}[parking]/forParking`
+        router.pathname === `${UrlPath.parkingCode.url}/forParking`
     )
   })
   const handleClickDeviceMenuButton = () => {
@@ -160,7 +164,7 @@ function SideBarFull({ onClick }) {
                 }
                 href={`${UrlPath.parkingCode.url}sendMoto`}
                 icon={
-                  <ListIcon
+                  <Motoricon
                     width={'1.5em'}
                     height={'1.5em'}
                     light={
@@ -181,7 +185,7 @@ function SideBarFull({ onClick }) {
                 }
                 href={`${UrlPath.parkingCode.url}sendCar`}
                 icon={
-                  <ListIcon
+                  <Caricon
                     width={'1.5em'}
                     height={'1.5em'}
                     light={
@@ -204,7 +208,7 @@ function SideBarFull({ onClick }) {
                 }
                 href={`${UrlPath.parkingCode.url}outMoto`}
                 icon={
-                  <ListIcon
+                  <ExitSideIcon
                     width={'1.5em'}
                     height={'1.5em'}
                     light={
@@ -222,16 +226,16 @@ function SideBarFull({ onClick }) {
               <MenuChildrenButton
                 active={
                   router.pathname ===
-                  `${UrlPath.parkingCode.url}[parking]/forParking`
+                  `${UrlPath.parkingCode.url}forParking`
                 }
-                href={`${UrlPath.parkingCode.url}${parkingCodeee}/forParking`}
+                href={`${UrlPath.parkingCode.url}forParking`}
                 icon={
                   <ListIcon
                     width={'1.5em'}
                     height={'1.5em'}
                     light={
                       router.pathname ===
-                      `${UrlPath.parkingCode.url}[parking]/forParking`
+                      `${UrlPath.parkingCode.url} forParking`
                         ? 1
                         : 0
                     }
@@ -280,16 +284,16 @@ function SideBarFull({ onClick }) {
           {isRoleAdmin&&(
           <MenuButtonSideBarFull
             active={
-              router.pathname === `${UrlPath.parkingCode.url}[parking]/sending`
+              router.pathname === `${UrlPath.parkingCode.url}registerMonthTicket`
             }
-            href={`${UrlPath.parkingCode.url}${parkingCodeee}/vehicleHistory`}
+            href={`${UrlPath.parkingCode.url}registerMonthTicket`}
             icon={
-              <ListIcon
+              <MonthTicket  
                 width={'1.5em'}
                 height={'1.5em'}
                 light={
                   router.pathname ===
-                  `${UrlPath.parkingCode.url}[parking]/vehicleHistory`
+                  `${UrlPath.parkingCode.url}registerMonthTicket`
                     ? 1
                     : 0
                 }
@@ -299,7 +303,7 @@ function SideBarFull({ onClick }) {
             Register Month Ticket
           </MenuButtonSideBarFull>
           )}
-          <MenuButtonSideBarFull
+          {/* <MenuButtonSideBarFull
             active={router.pathname === UrlPath.help.url}
             href={UrlPath.help.url}
             icon={
@@ -307,7 +311,7 @@ function SideBarFull({ onClick }) {
             }
           >
             Announcement
-          </MenuButtonSideBarFull>
+          </MenuButtonSideBarFull> */}
         </DivSideBarStyled3>
       </DivSideBarStyled1>
     </>

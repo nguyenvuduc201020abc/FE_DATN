@@ -22,6 +22,22 @@ const HeaderBar = ({ onToggleSidebar }) => {
       case UrlPath.help.url: {
         return UrlPath.help.title
       }
+      case UrlPath.sendMoto.url: {
+        return UrlPath.sendMoto.title
+      }
+      case UrlPath.sendCar.url: {
+        return UrlPath.sendCar.title
+      }  
+      case UrlPath.outMoto.url: {
+        return UrlPath.outMoto.title
+      }
+      case UrlPath.forParking.url: {
+        return UrlPath.forParking.title
+      }
+      case UrlPath.registerMonthTicket.url: {
+        return UrlPath.registerMonthTicket.title
+      }
+      
     
     }
   }

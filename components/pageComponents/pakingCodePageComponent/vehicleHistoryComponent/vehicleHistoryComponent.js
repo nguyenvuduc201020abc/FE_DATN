@@ -32,6 +32,7 @@ const AccComoponent = () => {
       // Include the required data for the payment API
       // Use the values stored in the state variables
     };
+    
     console.log(month_ticket)
     axios.post(`${BASE_URL}/add_month_ticket`, month_ticket)
       .then(response => {
@@ -82,12 +83,14 @@ const AccComoponent = () => {
           console.error(error);
         });
     }
+
   };
 
   return (
     <>
     <Col span={23} style={{marginLeft:'18px'}}>
-      <Row justify='center' style={{marginTop:'100px'}}>
+      <h2 style={{fontSize:'24px', fontWeight:'bold',marginTop:'40px', display:'flex', justifyContent: 'center', alignItems: 'center'}} > REGISTER MONTH TICKET</h2>
+      <Row justify='center' style={{marginTop:'40px'}}>
         <Col span={3}>
           <Row  justify='center' >
             <h2 >ID Card</h2>
@@ -144,7 +147,7 @@ const AccComoponent = () => {
           </Row>
 
         </Col>
-        <Col>
+        {/* <Col>
           <Row justify='center'>
 
 
@@ -158,7 +161,7 @@ const AccComoponent = () => {
             />
           </Row>
 
-        </Col>
+        </Col> */}
         <Col>
           <Row justify='center'>
 
@@ -188,6 +191,21 @@ const AccComoponent = () => {
 
 
         </Col>
+        <Col>
+          <Row justify='center'>
+
+
+            <h2>Parking</h2>
+          </Row>
+          <Row>
+            <Input
+              value={parking_name}
+              onChange={(e) => setParking(e.target.value)}
+              readOnly // Đánh dấu ô nhập liệu là chỉ đọc
+            />
+          </Row>
+
+        </Col>
         <>
       {/* ...existing code... */}
 
@@ -197,6 +215,7 @@ const AccComoponent = () => {
     </> 
       </Row>
       </Col>
+      
       {/* <Button type="primary" >
         
       </Button> */}

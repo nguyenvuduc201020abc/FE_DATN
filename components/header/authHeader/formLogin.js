@@ -141,7 +141,7 @@ const FormLogin = () => {
           >
             <Input
               value={userNameTemp}
-              placeholder="Tài Khoản"
+              placeholder="Username"
               onChange={(e) => setUserNameTemp(e.target.value)}
               prefix={<UserOutlined />}
             />
@@ -159,7 +159,7 @@ const FormLogin = () => {
           >
             <Input.Password
               value={passwordTemp}
-              placeholder="Mật Khẩu"
+              placeholder="Password"
               onChange={(e) => setPasswordTemp(e.target.value)}
               prefix={<PasswordIcon />}
             />

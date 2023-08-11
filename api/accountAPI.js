@@ -28,3 +28,4 @@ export const apiPostAccount = async () => {
     method: 'post'
   })
 }
+

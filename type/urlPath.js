@@ -8,32 +8,49 @@ export const UrlPath = {
   parkingCode: { url: '/parking/', title: 'Chi tiết Bãi Xe' },
   help: { url: '/help', title: 'Help' },
 
-  forParking: {
-    url: '/parking/',
-    title:'Gửi xe'
+  // forParking: {
+  //   url: '/parking/',
+  //   title:'Gửi xe'
+  // },
+  // revenue: {
+  //   url: '/parking/',
+  //   title:'Doanh thu'
+  // },
+  registerMonthTicket: {
+    url: '/parking/registerMonthTicket',
+    title:'Register month ticket'
   },
-  revenue: {
-    url: '/parking/',
-    title:'Doanh thu'
-  },
-  vehicleHistory: {
-    url: '/parking/',
-    title:'Thông tin xe gửi'
-  },
+  // sendMoto: {
+  //   url: '/parking/',
+  //   title:'Motorbike in'
+  // },
+  // sendCar: {
+  //   url: '/parking/',
+  //   title:'Car in'
+  // },
+  // outMoto: {
+  //   url: '/parking/',
+  //   title:'Xe máy ra'
+  // },
+  // outOto: {
+  //   url: '/parking/',
+  //   title:'Xe ôto ra'
+  // },
   sendMoto: {
-    url: '/parking/',
-    title:'Gửi xe máy'
+    url: '/parking/sendMoto',
+    title:'Motorbike in'
   },
   sendCar: {
-    url: '/parking/',
-    title:'Gửi xe oto'
+    url: '/parking/sendCar',
+    title:'Car in'
   },
   outMoto: {
-    url: '/parking/',
-    title:'Xe máy ra'
+    url: '/parking/outMoto',
+    title:'Vehicle out'
   },
-  outOto: {
-    url: '/parking/',
-    title:'Xe ôto ra'
-  }
+  
+  forParking: {
+    url: '/parking/forParking',
+    title:'Vehicle in parking'
+  },
 }

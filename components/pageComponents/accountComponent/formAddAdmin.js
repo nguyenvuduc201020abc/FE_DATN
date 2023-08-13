@@ -1,6 +1,6 @@
 import { Button, Col, Form, Input, message, Row, Select, Spin } from 'antd'
 import axios from 'axios'
-import React, { memo, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { BASE_URL } from '../../../api/requet'
 import { StyledButtonPressedEffect } from '../../styled/styledListOfDevice/styledComponent'
 const validateMessages = {
@@ -22,6 +22,19 @@ const FormAddAccount = () => {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [parkingList, setParkingList] = useState([]);
+
+  useEffect(() => {
+    // Gọi API để lấy danh sách bãi đỗ xe
+    axios.get(`${BASE_URL}/get-all-parking-name`)
+      .then(response => {
+        setParkingList(response.data); // Cập nhật state 'parkingList'
+      })
+      .catch(error => {
+        console.error('Lỗi khi lấy danh sách bãi đỗ xe:', error);
+      });
+  }, []);
+
   var cookies = document.cookie.split(';')
 
   // Tìm và lấy giá trị của "parkingCode" từ cookie
@@ -137,24 +150,28 @@ const FormAddAccount = () => {
                   width: 200
                 }}
                 onChange={SelectRole}
-                options={[
-                  {
-                    value: 'Truong Dinh Parking',
-                    label: 'Truong Dinh Parking'
-                  },
-                  {
-                    value: 'Vu Ngoc Phan Parking',
-                    label: 'Vu Ngoc Phan Parking'
-                  }, 
-                   {
-                    value: 'Bach Khoa Parking',
-                    label: 'Bach Khoa Parking'
-                  },
-                  {
-                    value: 'Lac Long Quan Parking',
-                    label: 'Lac Long Quan Parking'
-                  }
-                ]}
+                options={parkingList.map(parking => ({
+                  value: parking, // Sử dụng id của bãi đỗ xe từ API
+                  label: parking // Tên bãi đỗ xe từ API
+                }))}
+                // options={[
+                //   {
+                //     value: 'Truong Dinh Parking',
+                //     label: 'Truong Dinh Parking'
+                //   },
+                //   {
+                //     value: 'Vu Ngoc Phan Parking',
+                //     label: 'Vu Ngoc Phan Parking'
+                //   }, 
+                //    {
+                //     value: 'Bach Khoa Parking',
+                //     label: 'Bach Khoa Parking'
+                //   },
+                //   {
+                //     value: 'Lac Long Quan Parking',
+                //     label: 'Lac Long Quan Parking'
+                //   }
+                // ]}
               />
             </Form.Item>
           )}

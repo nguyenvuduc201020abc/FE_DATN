@@ -58,7 +58,7 @@ const RightMenuAdmin = (props) => {
                   fontFamily: 'sans-serif'
                 }}
               >
-                {userName}
+                {Cookies.get("username")}
                 <br />
               </span>
               <ModalAdminHeader FormChangePassRef={FormChangePassRef} />

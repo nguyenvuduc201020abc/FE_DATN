@@ -1,4 +1,6 @@
 
+
+
 import { Col, Form, Input, Row, message } from 'antd';
 import { H5Styled, H8Styled } from '../../../styled/HomeStyledComponent/listStyled';
 import CameraComponent from '../../cameraComponent/cameraComponent';
@@ -100,15 +102,14 @@ const SendMotoComponent = () => {
           }
         }
       );
-      console.log((response.data.secure_url));
-      // setUrlImage(response.data.secure_url);
-      console.log('Image uploaded successfully:', response.data.secure_url);
+      setUrlImage(response.data.secure_url);
       const recognitionUrl = 'https://smartparking.website/xla/api/recognition';
       // const requestBody = 'https://res.cloudinary.com/deae9vxvg/image/upload/v1688226172/kow7pug8o1s7dz8dxn6t.jpg'; // Adjust the data value as required
       const requestBody = response.data.secure_url;
       const recognitionResponse = await axios.post(recognitionUrl, requestBody);
       setLisenseVehicle(recognitionResponse.data.data[0].textPlate);
       console.log(recognitionResponse.data.data[0].textPlate); 
+      console.log('Image uploaded successfully:', response.data.secure_url);
       // Save the URL of the image to the database or handle the response as needed
     } catch (error) {
       console.error('Error uploading image:', error);
@@ -172,7 +173,7 @@ const SendMotoComponent = () => {
       <Row justify="center">
         <Col span={23}>
           <H8Styled style={{ margin: '10px 0px 5px 0px', textAlign: 'center' }}>
-            Management Parking
+          Management Parking
           </H8Styled>
           <Row gutter={[16, 16]}>
             <StyledCol xs={24} sm={12} lg={12} style={{ marginTop: '5px', textAlign: 'center' }}>
@@ -241,7 +242,7 @@ const SendMotoComponent = () => {
               style={{ paddingTop: '20px', marginBottom: '7px' }}
             ><h2 style={{ display: 'flex', alignItems: 'center' }}>
             ID: 
-            <Input ref={inputRef} value={IDCard} onChange={(e) => setIDCard(e.target.value)} />
+            <Input style={{fontWeight: 'bold', fontSize: '18px'}}  ref={inputRef} value={IDCard} onChange={(e) => setIDCard(e.target.value)} />
           </h2>
           
             </Form.Item>
@@ -276,7 +277,14 @@ const SendMotoComponent = () => {
      
         <Row>
             <Form.Item name="license_vehicle" style={{ marginBottom: '7px' }}>
-              <h2>License_vehicle: {lisenseVehicle}</h2>
+              <Row><Col>
+              <h2>License_vehicle:</h2>
+              </Col>
+              
+              <Col>
+              <Input style={{fontWeight: 'bold', fontSize: '18px', border: 'none'}} value={lisenseVehicle} onChange={(e) => setLisenseVehicle(e.target.value)} />
+              </Col>
+              </Row>
             </Form.Item>
             </Row>
             {/* <Row>

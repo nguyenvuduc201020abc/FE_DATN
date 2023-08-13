@@ -50,6 +50,8 @@ const OutMotoComponent = () => {
   const [cost, setCost] = useState()
   const [form] = Form.useForm();
   const [image, setImage] = useState()
+  const cloudinaryCloudName = 'deae9vxvg';
+  const cloudinaryUploadPreset = 'qqvsrckx';
 
 
   useEffect(() => {
@@ -156,12 +158,50 @@ const OutMotoComponent = () => {
     //   // Xử lý lỗi ở đây
     //   }
     //   };
-      
     const fetchData = async (IDCard) => {
-
+      const imageSrc = webcamRef.current.getScreenshot()
+      const formData = new FormData()
+      let a
+      formData.append('file', imageSrc)
+      formData.append('upload_preset', cloudinaryUploadPreset)
+      try {
+        const response = await axios.post(`
+          https://api.cloudinary.com/v1_1/${cloudinaryCloudName}/image/upload`,  
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+        )
+        console.log('Image uploaded successfully:', response.data.secure_url)
+        const recognitionUrl = 'https://smartparking.website/xla/api/recognition'
+        const requestBody = response.data.secure_url // Adjust the data value as required
+  
+        const recognitionResponse = await axios.post(recognitionUrl, requestBody)
+        a = recognitionResponse.data.data[0].textPlate
+        console.log('aabb', a)
+        setLisenseVehicleUrl(recognitionResponse.data.data[0].textPlate)
+        console.log(recognitionResponse.data)
+        // Save the URL of the image to the database or handle the response as needed
+      } catch (error) {
+        console.error('Error uploading image:', error)
+      }
+      setTimeout(() => {
+        setCapturedImage('')
+      }, 3000)
+      console.log('Image URL:', image)
+      setIsLoading(true)
+      // try {
+      //    // Handle the data returned from the API
+      // } catch (error) {
+      //   console.error(error); // Handle the error if the API call fails
+      // }
       console.log(IDCard)
       try {
-        // console.log(month_ticket);
+        // const response = await axios.get(
+        //   ${BASE_URL}entryVehicles/IDCard?IDCard=${IDCard} 
+        // )
         const headers = {
           Authorization:'Bearer '+Cookies.get('jwt_token'),
           // Thêm các header khác nếu cần
@@ -169,24 +209,64 @@ const OutMotoComponent = () => {
         const response = await axios.get(
           `${BASE_URL}/export-bill?id_card=${IDCard} `,{headers}
         )
-        console.log(response.data);
+  
+        // setlisenseVehicle(response.data.license_vehicle)
+        const b = response.data.license_vehicle;
         setImage(response.data.image)
-        setvehicleyType(response.data.type)
+        if (a == b) {
+          setImage(response.data.image)
+          setvehicleyType(response.data.type)
         // var entry_time1 = response.data.entry_time;
         // var entry_time2 = entry_time1.format('HH:mm:ss  YYYY-MM-DD ')
-        var entry_time1 = response.data.entry_time;
-        var entry_time2 = moment(entry_time1).format('HH:mm:ss YYYY-MM-DD');
+          var entry_time1 = response.data.entry_time;
+          var entry_time2 = moment(entry_time1).format('HH:mm:ss YYYY-MM-DD');
         setlisenseVehicle(response.data.license_vehicle)
         setEntryTime(entry_time2)
         setCost(response.data.cost)
         console.log(`${BASE_URL}/export-bill?id_card=${IDCard}`,{headers});
         console.log(response.data);
         setCost(response.data.cost)
+        } else {
+          setIsLoading(false)
+          message.error('License vehicle not match')
+          setIDCard('')
+        }
       } catch (error) {
-        // Xử lý lỗi khi gọi API
+        message.error('IDCard not found')
+        setIDCard('')
         console.error(error)
       }
     }
+    // const fetchData = async (IDCard) => {
+
+    //   console.log(IDCard)
+    //   try {
+    //     // console.log(month_ticket);
+    //     const headers = {
+    //       Authorization:'Bearer '+Cookies.get('jwt_token'),
+    //       // Thêm các header khác nếu cần
+    //     };
+    //     const response = await axios.get(
+    //       `${BASE_URL}/export-bill?id_card=${IDCard} `,{headers}
+    //     )
+    //     console.log(response.data);
+    //     setImage(response.data.image)
+    //     setvehicleyType(response.data.type)
+    //     // var entry_time1 = response.data.entry_time;
+    //     // var entry_time2 = entry_time1.format('HH:mm:ss  YYYY-MM-DD ')
+    //     var entry_time1 = response.data.entry_time;
+    //     var entry_time2 = moment(entry_time1).format('HH:mm:ss YYYY-MM-DD');
+    //     setlisenseVehicle(response.data.license_vehicle)
+    //     setEntryTime(entry_time2)
+    //     setCost(response.data.cost)
+    //     console.log(`${BASE_URL}/export-bill?id_card=${IDCard}`,{headers});
+    //     console.log(response.data);
+    //     setCost(response.data.cost)
+    //   } catch (error) {
+    //     // Xử lý lỗi khi gọi API
+    //     console.error(error)
+    //   }
+    // }
  
   return (
     <>

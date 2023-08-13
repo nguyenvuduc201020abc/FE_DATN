@@ -242,7 +242,7 @@ const SendMotoComponent = () => {
               style={{ paddingTop: '20px', marginBottom: '7px' }}
             ><h2 style={{ display: 'flex', alignItems: 'center' }}>
             ID: 
-            <Input ref={inputRef} value={IDCard} onChange={(e) => setIDCard(e.target.value)} />
+            <Input style={{fontWeight: 'bold', fontSize: '18px'}}  ref={inputRef} value={IDCard} onChange={(e) => setIDCard(e.target.value)} />
           </h2>
           
             </Form.Item>
@@ -277,7 +277,14 @@ const SendMotoComponent = () => {
      
         <Row>
             <Form.Item name="license_vehicle" style={{ marginBottom: '7px' }}>
-              <h2>License_vehicle: {lisenseVehicle}</h2>
+              <Row><Col>
+              <h2>License_vehicle:</h2>
+              </Col>
+              
+              <Col>
+              <Input style={{fontWeight: 'bold', fontSize: '18px', border: 'none'}} value={lisenseVehicle} onChange={(e) => setLisenseVehicle(e.target.value)} />
+              </Col>
+              </Row>
             </Form.Item>
             </Row>
             {/* <Row>

@@ -52,8 +52,8 @@ const OutMotoComponent = () => {
   const [image, setImage] = useState()
   const cloudinaryCloudName = 'deae9vxvg';
   const cloudinaryUploadPreset = 'qqvsrckx';
-
-
+  const [lisenseVehicleUrl, setLisenseVehicleUrl] = useState('')
+ 
   useEffect(() => {
     const initialValues = String(Cookies.get('parkingName'));
     setParkingName(initialValues)
@@ -165,8 +165,8 @@ const OutMotoComponent = () => {
       formData.append('file', imageSrc)
       formData.append('upload_preset', cloudinaryUploadPreset)
       try {
-        const response = await axios.post(`
-          https://api.cloudinary.com/v1_1/${cloudinaryCloudName}/image/upload`,  
+        const response = await axios.post(
+          `https://api.cloudinary.com/v1_1/${cloudinaryCloudName}/image/upload`,  
           formData,
           {
             headers: {

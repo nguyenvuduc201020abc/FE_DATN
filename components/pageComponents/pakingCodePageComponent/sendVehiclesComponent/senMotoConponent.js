@@ -102,22 +102,29 @@ const SendMotoComponent = () => {
           }
         }
       );
+      
       setUrlImage(response.data.secure_url);
       const recognitionUrl = 'https://smartparking.website/xla/api/recognition';
       // const requestBody = 'https://res.cloudinary.com/deae9vxvg/image/upload/v1688226172/kow7pug8o1s7dz8dxn6t.jpg'; // Adjust the data value as required
       const requestBody = response.data.secure_url;
       const recognitionResponse = await axios.post(recognitionUrl, requestBody);
+      
       setLisenseVehicle(recognitionResponse.data.data[0].textPlate);
-      console.log(recognitionResponse.data.data[0].textPlate); 
-      console.log('Image uploaded successfully:', response.data.secure_url);
-      // Save the URL of the image to the database or handle the response as needed
+      if(recognitionResponse.data.data[0].textPlate.length===0){
+        message.error("Can not read license vehicle")
+      }
     } catch (error) {
+      message.error("Can not read license vehicle")
       console.error('Error uploading image:', error);
     }
     setTimeout(() => {
       setCapturedImage('');
-    }, 3000);
+    }, 30000);
+    // if(lisenseVehicle==null||lisenseVehicle.length==0){
+    //   message.error("Can not read license vehicle")
+    // }
     console.log('Image URL:', image);
+    // console.log("aaaa"+lisenseVehicle);
     setIsLoading(true);
     // try {
     //   const recognitionUrl = 'http://localhost:80/api/recognition';
@@ -146,7 +153,7 @@ const SendMotoComponent = () => {
       .post(`${BASE_URL}/save-vehicle1`, values)
         .then(() => {
           setIsLoading(false);
-          message.info('Thêm thành công');
+          message.info('Add successfully!');
       setIDCard('')
       setLisenseVehicle('')
       setEntryTime('')
@@ -154,7 +161,7 @@ const SendMotoComponent = () => {
         })
         .catch((error) => {
           setIsLoading(false);
-          message.error(error.response.data.message);
+          message.error('Any information empty!');
       setIDCard('')
       setLisenseVehicle('')
       setEntryTime('')

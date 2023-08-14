@@ -185,6 +185,7 @@ const OutMotoComponent = () => {
         console.log(recognitionResponse.data)
         // Save the URL of the image to the database or handle the response as needed
       } catch (error) {
+        message.error("Can not read license vehicle")
         console.error('Error uploading image:', error)
       }
       setTimeout(() => {
@@ -312,7 +313,7 @@ const OutMotoComponent = () => {
                 
                   <img
                     src={image}
-                    alt="Ảnh chụp"
+                    // alt="Ảnh chụp"
                     style={{ maxWidth: '100%', maxHeight: '100%' }}
                   />
                 

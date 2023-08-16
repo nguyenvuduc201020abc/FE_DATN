@@ -159,7 +159,7 @@ const SendMotoComponent = () => {
       .post(`${BASE_URL}/save-vehicle1`, values)
         .then(() => {
           setIsLoading(false);
-          message.info('Thêm thành công');
+          message.info('Add vehicle success!');
       setIDCard('')
       setLisenseVehicle('')
       setEntryTime('')

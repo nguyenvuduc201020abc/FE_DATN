@@ -26,29 +26,42 @@ const SearchAccount = () => {
     setParkingCode(initialValues)
   }, [])
   const handleSearchAccount = (value) => {
-    setIsLoading(true)
+    // setIsLoading(true)
     const getVehicles = async () => {
-      await axios
-        .get(
-          `${BASE_URL}entryVehicles/search?Skip=${skip}&PageSize=${pageSize}&ParkingCode=${parkingCode}&Search=${value}`
+      try {
+        const response = await axios.get(
+          `${BASE_URL}/get_info_vehicle_search?search=${value}`
         )
-        .then((response) => {
-          if (response.data.result.items.length === 0) {
-            message.error('Không tìm thấy kết quả nào')
-          } else {
-            message.info('Lấy dữ liệu thành công')
-            //setValueAccSearch(value)
-            setDataAccSearch(response.data.result.items)
-            console.log('aabbbbbaaaa', dataSearch)
-            // setTotalAccSearch(response.data.result.totalItems)
-          }
-        })
-        .catch((error) => {
-          message.error('Không tồn tại')
-          // setData(newDataConfigFailure)
-        })
-      setIsLoading(false)
+        console.log(response.data)
+        setDataAccSearch(response.data)
+      } catch (error) {
+        // Xử lý lỗi khi gọi API
+        console.error(error)
+      }
     }
+    //   await axios
+    //     .get(
+    //       `${BASE_URL}/get_info_vehicle_search?search=${value}`
+    //     )
+    //     .then((response) => {
+    //       console.log(`${BASE_URL}/get_info_vehicle_search?search=${value}`)
+    //       if (response.data.length === 0) {
+    //         message.error('No results found!')
+    //       } else {
+    //         message.info('Get data success!')
+    //         //setValueAccSearch(value)
+    //         setDataAccSearch(response.data)
+    //         console.log("aaaa"+ response)
+    //         // console.log('aabbbbbaaaa', dataSearch)
+    //         // setTotalAccSearch(response.data.result.totalItems)
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       console.error(error)
+    //       // setData(newDataConfigFailure)
+    //     })
+    //   setIsLoading(false)
+    // }
     getVehicles()
   }
   // useEffect(() => {

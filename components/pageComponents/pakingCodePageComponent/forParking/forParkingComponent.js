@@ -92,7 +92,7 @@ const ForParkingComponent = (prop) => {
 
     fetchData()
   }, [skip])
-  console.log('ve', vehicles)
+  console.log('vehicle', vehicles)
   // const [editingKey, setEditingKey] = useState('')
   // const isEditing = (record) => record.key === editingKey
   // useEffect(() => {
@@ -145,12 +145,12 @@ const ForParkingComponent = (prop) => {
     )
       .map((item, index) => ({
         key: index,
-        entryTime: moment(item[1].entry_time).format("YYYY-MM-DD HH:mm:ss"),
-        parkingname: item[1].parking_name,
-        username: item[1].id_card,
-        vehicleyType: item[1].type,
+        entry_time: moment(item[1].entry_time).format("YYYY-MM-DD HH:mm:ss"),
+        parking_name: item[1].parking_name,
+        id_card: item[1].id_card,
+        type: item[1].type,
         image: item[1].image,
-        lisenseVehicle: item[1].license_vehicle
+        license_vehicle: item[1].license_vehicle
       }))
     setDataOri(filteredData)
   }, [vehicles])
@@ -162,31 +162,31 @@ const ForParkingComponent = (prop) => {
   const columns = [
     {
       title: 'Parking name',
-      dataIndex: 'parkingname',
+      dataIndex: 'parking_name',
       width: '10%',
       editable: true
     },
     {
       title: 'Id card',
-      dataIndex: 'username',
+      dataIndex: 'id_card',
       width: '13%',
       editable: true
     },
     {
       title: 'Type',
-      dataIndex: 'vehicleyType',
+      dataIndex: 'type',
       width: '10%',
       editable: true
     },
     {
       title: 'License vehicle',
-      dataIndex: 'lisenseVehicle',
+      dataIndex: 'license_vehicle',
       width: '12%',
       editable: true
     },
     {
       title: 'Entry time',
-      dataIndex: 'entryTime',
+      dataIndex: 'entry_time',
       width: '15%',
       editable: true
     },

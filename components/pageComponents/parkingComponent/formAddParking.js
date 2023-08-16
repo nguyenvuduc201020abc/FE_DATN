@@ -41,7 +41,7 @@ const FormAddParking = ( ) => {
         .post(`${BASE_URL}/add-parking`, values)
         .then(() => {
           setLoading(false)
-          message.info('Thêm thành công')
+          message.info('Add vehicle success!')
         })
         .catch((error) => {
           setLoading(false)

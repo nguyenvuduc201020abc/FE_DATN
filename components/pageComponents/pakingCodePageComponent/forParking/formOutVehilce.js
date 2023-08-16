@@ -45,22 +45,22 @@ const FormOutVehilce = () => {
   const [form] = Form.useForm()
   useEffect(() => {
     setImageIn(modalData.image)
-    setEntryTime(modalData.entryTime)
-    setUserName(modalData.username)
-    setLisenseVehicle(modalData.lisenseVehicle)
-    setVehicleyType(modalData.vehicleyType)
+    setEntryTime(modalData.entry_time)
+    setUserName(modalData.id_card)
+    setLisenseVehicle(modalData.license_vehicle)
+    setVehicleyType(modalData.type)
     setParkingName(Cookies.get('parkingName'))
     setCost(35000);
   })
   const onFinish = async () => {
-    console.log(`${BASE_URL}/save-bill?id_card=${modalData.username}`)
+    console.log(`${BASE_URL}/save-bill?id_card=${modalData.id_card}`)
     const headers = {
       Authorization:'Bearer '+Cookies.get('jwt_token'),
     };
     
     await axios
       .post(
-        `${BASE_URL}/save-bill?id_card=${modalData.username}`,{headers}
+        `${BASE_URL}/save-bill?id_card=${modalData.id_card}`,{headers}
       )
       .then((response) => {
         console.log(headers)
